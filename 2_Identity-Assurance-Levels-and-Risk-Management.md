@@ -1,6 +1,14 @@
 # Identity Assurance Levels and Risk Management
 
-NIST SP 800-63A divides identity proofing requirements into three different assurance levels: Identity Assurance Levels, or IALs, 1, 2 and 3. At each level the document describes unique requirements for the processes, techniques, and approaches that may be taken by agencies and organizations, with increasing levels of stringency. These levels align with the Levels of Assurance, or LOA’s, in Office of Management and Budget’s Memorandum M-04-04, *E-Authentication Guidance for Federal Agencies*, which outlines overall identity assurance levels based on risk and potential impacts of a system compromise to the agency and users. This alignment and SP 800-63A’s descriptions of assurance levels have been outlined in Table 1.
+> Paul: Please make sure to link to documents.
+
+NIST SP 800-63A divides identity proofing requirements into three Identity Assurance Levels. At each level the document describes unique requirements for the processes, techniques, and approaches that may be taken by agencies and organizations, with increasing levels of stringency. 
+
+
+> Paul: None of this is true anymore since OMB M0404 will be rescinded. What would be ok is to have this as an informative mapping for those making the *transition* from M0404 to 800-63-3. But I would imagine that is better content for the -3 implementation guidance.
+
+
+These levels align with the Levels of Assurance, or LOA’s, in Office of Management and Budget’s Memorandum M-04-04, *E-Authentication Guidance for Federal Agencies*, which outlines overall identity assurance levels based on risk and potential impacts of a system compromise to the agency and users. This alignment and SP 800-63A’s descriptions of assurance levels have been outlined in Table 1.
 
 | SP 800-63 IAL | Description | OMB M04-04 LOA |
 | ------------- | ----------- | -------------- |
@@ -10,13 +18,21 @@ NIST SP 800-63A divides identity proofing requirements into three different assu
 
 **Table 1:** Identity Assurance Levels in SP 800-63A and OMB M-04-04
 
-Agencies and service providers building or acquiring identity solutions are expected to conduct a thorough risk assessment of their systems –including assessments of both privacy and security risks-- and understand the risks associated with the resources, data, and applications being accessed via a specific identity management solution. This document does not provide guidance on how to conduct these risk assessment, but readers can find further information in resources such as the aforementioned M-04-04; NIST Special Publication 800-53, *Security and Privacy Controls for Federal Information Systems and Organizations*; or Federal Information Processing Standards publication 199, *Standards for Security Categorization of Federal Information and Information Systems*. 
+Per 800-63-3, agencies are required to conduct a thorough risk assessment of their systems –including assessments of both privacy and security risks-- and understand the risks associated with the resources, data, and applications being accessed via a specific identity management solution. This document does not provide guidance on how to conduct these risk assessment, but readers can find further information in
+
+>Paul: point them to the RMF.
+
+resources such NIST Special Publication 800-53, *Security and Privacy Controls for Federal Information Systems and Organizations*; or Federal Information Processing Standards publication 199, *Standards for Security Categorization of Federal Information and Information Systems*. 
+
+> Paul: This is in an awkward place. I would expect a chapter or subchapter on what appropriate controls are. And that it doesn't need to just be 800-53. It can be equivalent. Also, I think anything regarding risk is pointed at the agencies, not service providers. It is good to mention service providers, but only in the context that they provider services at a given xAL and agencies can outsource to the appropritat provides based on their assessed risk, or building their own.
 
 Additionally, agencies and service providers are expected to employ appropriately tailored security controls from the moderate baseline of security controls defined in NIST SP800-53 or equivalent industry standard and ensure that the minimum assurance requirements associated with the moderate baseline are satisfied.
 
 ## Selecting an IAL
 
-Managing the risk assessment process and selecting the assurance level can be challenging. To assist agencies through the process, NIST has built the framework around identity assurance levels summarized in Table 1 and provided selection guidance in SP800-63A. Assurance in a subscriber’s identity is described using one of three Identity Assurance Levels, or IALs. The IAL selection process, as presented in NIST800-63-3, has been illustrated in Figure 2. Broadly categorizing all subsystems at the same level of identity assurance may not be ideal and it should be recognized that systems with different IAL1 and IAL2 or IAL3 compartments may need to be partitioned with respect to their specific identity assurance level requirements, leading the implementations to be done accordingly.
+> Paul: this reads awkwardly. How is table 1 a framework?
+
+NIST included a sample process flow framework around identity assurance levels summarized in Table 1 and provided selection guidance in SP800-63A. Assurance in a subscriber’s identity is described using one of three Identity Assurance Levels, or IALs. The IAL selection process, as presented in NIST800-63-3, has been illustrated in Figure 2. Broadly categorizing all subsystems at the same level of identity assurance may not be ideal and it should be recognized that systems with different IAL1 and IAL2 or IAL3 compartments may need to be partitioned with respect to their specific identity assurance level requirements, leading the implementations to be done accordingly.
 
 ![Figure 2: Selecting an IAL](https://github.com/usnistgov/800-63-3/blob/nist-pages/sp800-63-3/media/IAL_CYOA.png)
 
@@ -43,6 +59,9 @@ For IAL3:
 - Attributes must be verified by an authorized and trained representative of the CSP
 - CSPs may assert attributes to RPs for verification in support of pseudonymous identity
 
+> Paul: Let's discuss the below. I am not sure this is helpful since -A already provides examples pretty clearly.
+
+
 | ***Case Example: IAL Selection without Proofing***|
 | --- |
 | A free secure messaging service provider offers desktop and smartphone application versions of a product that allows users to send one another encrypted messages via the internet. Users are registered by providing a first and a last name and selecting a unique user name that is connected to an email address through which registration has to be confirmed and account management is done. Secure authentication is done via user name and a custom password.
@@ -53,9 +72,13 @@ As with the other content in this document the IAL selection guidance is intende
 
 As seen in the case example, there is no proof requirement until IAL2.
 
+
+
 ## Determining the Necessary Evidence
 
-Once the identity assurance level for a system or subsystem has been selected, the CSP can determine the evidence required for identity proofing.
+> Paul: This is when things get good, but I am not sure this section is the right place. If we decide to can this section since we have a -3 document, this would really be Step 1 in getting proofing right, so a later chapter may make sense.
+
+Once the identity assurance level for a system or subsystem has been selected, the CSP can determine the attributes and identity evidence required to satisfy their use case.
 
 Beside the information provided by the applicant during the enrollment process –please note that the word “information” here is intended to convey information provided in the content of an evidence document, and not solely knowledge or the applicant’s say-so, which alone is not sufficient for proofing—, the validation step may also require evidence from an applicant as dictated by the requirements of the CSP. Submitting evidence this way in multiple stages can become burdensome for an applicant. It is important to consider collecting the appropriate evidence up-front to avoid requiring the user to perform multiple interactions in order to establish and account.
 
@@ -63,14 +86,18 @@ There should be a good balance between executing the proofing process and minimi
 
 ## Types of Evidence
 
+> Paul: We will need a subsection on attribute selection and a subsection on evidence. It's important to let agencies know that something like SSN may be collected to lookup data, yet won't be on any piece of evidence. In fact, I think a section, maybe in intro, should be included to highlight that the proofing requirements are such that it makes possession of data (i.e. a breach) irrelevant. You still need to pass validate and verify which is hard and targeted.
+
 Table 2 provides examples of evidence from each category of strength defined in the aforementioned identity evidence quality table in 800-63A.
+
+> Paul: This list needs to be more robust. See the UK op manual. Let's also list digital evidence since we are making a big deal about that.
 
 | **Strength** | **Examples** |
 | --- | --- |
 | Unacceptable | Library Cards |
-| Weak | Organizational Membership Cards<br/>Birth Certificate<br/>Social Security Card |
-| Fair | Individual Tax Number<br/>Credit or Debit Card<br/> Bank Account Statement<br/>Utility Account Statement |
-| Strong | Real ID Driver’s License<br/>State ID |
+| Weak | Membership or Loyalty Cards<br/>Birth Certificate **Paul: Is this true? I thought some issued more recently are better?**<br/>Social Security Card |
+| Fair | Individual Tax Number **Paul: What is this?**<br/>Credit or Debit Card<br/> Bank Account Statement **Checking, savings, 401K, credit card???**<br/>Utility Account Statement |
+| Strong | Real ID Driver’s License<br/>State Identification Card |
 | Superior | FIPS 201 Compliant Personal Identification Verification Card (PIV, PIV-I, and CAC)<br/>National Passports<br/>Enhanced Driver’s License or Identification |
 
 **Table 2:** Examples of Identity Evidence
@@ -79,9 +106,13 @@ Please note that while examples of unacceptable and weak evidence are presented 
 
 A CSP can collect an applicant’s social security number as additional information, but two other forms of identification should still be collected to which information in the social security number should still resolve. An example selection of evidence documents for a CSP to consider in an IAL2 process are shown in the following figure.
 
-![Figure 3: Selecting Evidence](https://github.com/usnistgov/800-63A-ImplGuide/blob/master/media/workflow-1-evidence-selection.png)
+>Paul: Since you color-coded blue green and gray, make the DL and State ID gray in all pics.
+
+![Figure 3: Selecting Evidence](media/workflow-1-evidence-selection.png)
 
 **Figure 3** Selecting Evidence
+
+> Paul: This is good stuff but is incomplete. We should do 2 things. Provide a robust list of physical and digital security features. And specify the minimum that should be checked. I know, this is getting normative, but we didn't do this in A, so let's do it here.
 
 Documents signed by digital watermarking (DWM) (such as driver’s license images) can also be used by CSP’s as a piece of strong evidence in identity proofing. Watermarks are embedded in images used in secure identity verification and use applications to verify the rightful owner of an evidence document. Some applications, for instance, use the applicant’s fingerprint information to watermark the image. Training of operators is also important for CSP’s to be able to expect and recognize the presence of a watermark in a piece of evidence that normally carries it, or notice when the watermark is absent for a simple binary fraud checking measure.
 
