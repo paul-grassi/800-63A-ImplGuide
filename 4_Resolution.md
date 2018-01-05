@@ -1,14 +1,16 @@
 # Resolution
 
-The goal of this step is to use the information provided by the applicant to resolve them to a unique, claimed identity. Considerations should be taken for individuals with common names, originating from populous areas, and geographies outside of the United States. This process may be started automatically upon submission of biographic information during the enrollment process. Unlike validation and verification, the resolution process is focused on ensuring that the information being provided is representative of a real unique individual that can be distinguished from other records to enable the verification of associated attributes and identity evidence. It, in and of itself, is not intended to provide confidence that the individual presenting the information is who they claim to be. 
-
-The overall resolution process provided by FIPS PUB 201, *Personal Identity Verification of Federal Employees and Contractors*, can be used as a guideline at the IAL3 level. IAL2 applications have less stringent identity proofing requirements (such as the relaxed IAL3 requirement of in-person presentation) and CSP’s should design their identity proofing process accordingly using the requirements in 800-63A.
+The goal of this step is to use the information provided by the applicant to resolve them to a unique, claimed identity. Considerations should be taken for individuals with common names, **Paul: again, we should be more specific about what to do with names.**originating from populous areas, and geographies outside of the United States **Paul: does populous matter? And why just US?**. This process may be started automatically upon submission of biographic information during the enrollment process. Unlike validation and verification, the resolution process is focused on ensuring that the information being provided is representative of a real unique individual that can be distinguished from other records to enable the verification of associated attributes and identity evidence. It, in and of itself, is not intended to provide confidence that the individual presenting the information is who they claim to be. 
 
 Agencies and CSPs should take into account factors specific to the populations that they serve, or intend to serve, to help design enrollment and proofing processes to allow for the collection of necessary information to uniquely distinguish between individual users—without collecting unnecessary sensitive information.  As SP800-63A emphasizes, effective identity resolution uses the smallest set of attributes necessary to resolve to a unique individual. Where possible non-sensitive information should be added to collection if additional attributes are needed to help differentiate users. For example, a population of former military personnel will provide different details and require different resolution data sources than foreign nationals.
+
+>Paul: we need to shift thinking here. An attribute change of a proofed identity is just that. No need to reproof, nothing. If dealing with a legit attribute provider, good to go. May be good to point to attribute metadata.
 
 | ***Example: Name Changes*** |
 | --- |
 | It should also be pointed out that not all individuals continue carrying the same legal name throughout their lifetime. Marriage is but one way the name of a person can change legally; another event that may result in a name change is a sex change, which may also result in a change in the self-identification of the individual’s gender, from male to female, or female to male, or female or male, to unknown or undefined. CSP’s should be aware of the possible complications that could be introduced in the proofing process due to these changes and take explicit steps to utilize the evidence documenting the name or gender change to ensure that the provided information resolves into a unique identity. |
+
+>Paul: we should delete all of this. Or I need to understand why this is important.
 
 Name changes frequently take place due to marriage, divorce or personal preference. When an applicant states that their name has changed and presents formal evidence of such change, the CSP should resolve the identity accordingly. The requirements and procedural guidelines in FIPS PUB 201 can be followed by CSP’s to issue a new credential in the event of a name change. 
 
@@ -42,6 +44,8 @@ CSP’s should take care to check for uniqueness during registration. Fuzzy matc
 
 Fuzzy matching is effective only when the degree of confidence in the inexact match of a single attribute can be supported by the matching of additional attributes that belong to the same identity. The following table can be used as a guideline for CSP’s to consider when using fuzzy matching to resolve identities. As an example if two of the attributes listed below have a confidence score of 95% and the third is at 100%, the total confidence level is just over 90%; if all three are at 95% overall confidence falls to 86% and if all three are above 98.5% overall confidence exceeds 95.5%.
 
+> Do we have a reference to point to? This is good stuff, but we need a reference and we need to avoid to some extent normative sounding language. 
+
 <table><tbody>
 <tr><th>Attribute</th><th>Check</th><th>Rule</th></tr>
 <tr><td>Name</td><td><ol><li>Align all fields.<li>Match with replacements, abbreviations.<li>Produce overall score as %.</ol></td><td rowspan=3>Multiply scores, compare to 90%.</td></tr>
@@ -50,6 +54,8 @@ Fuzzy matching is effective only when the degree of confidence in the inexact ma
 </tbody><table>
 
 **Table 4:** Fuzzy Matching of Attributes Using Name, Date of Birth and Current Address
+
+> Paul: this ia conjecture and should not be in the doc
 
 Accurate matching of attributes can be a requirement with immediate life-and-death consequences; the U.S. Department of Veterans’ Affairs and many large health care organizations use attribute matching systems to perform patient identity matching. These systems vary in costs and complexity and fuzzy matching algorithms consider demographic attributes such as name, date of birth, address and phone number. When comparisons indicate a high statistical likelihood that the records are related, the algorithm declares a match between the two records based on thresholds established by the assurance requirements of the use case. In deterministic cases (such as the algorithm used by the Veterans Health Administration) exact matching of identity and demographic data is performed. In general all fuzzy matching tools involve a similar sequence of steps:
 
